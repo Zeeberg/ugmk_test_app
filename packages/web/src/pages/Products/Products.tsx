@@ -48,7 +48,9 @@ const Products = () => {
     const factoryId = String(data.tooltipPayload[0].dataKey.split('.')[0]);
     const monthNumber = String(data.monthNumber);
 
-    navigate(`/details/${factoryId}/${monthNumber}`);
+    navigate(`/details/${factoryId}/${monthNumber}`, {
+      state: { filter, data },
+    });
   };
 
   return (
