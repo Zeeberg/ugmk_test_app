@@ -9,11 +9,11 @@ import { GetProductsDto } from "./dto/get-products.dto";
   version: "1",
 })
 export class ProductsController {
-  constructor(private readonly productsService: ProductsService) {}
+  constructor(private readonly service: ProductsService) {}
 
-  @Get()
+  @Get("barchart")
   @HttpCode(HttpStatus.OK)
-  findAll(@Query() getProductsDto: GetProductsDto) {
-    console.log(getProductsDto);
+  getBarChart(@Query() getProductsDto: GetProductsDto) {
+    return this.service.getBarChart(getProductsDto);
   }
 }
