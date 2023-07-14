@@ -1,8 +1,10 @@
-import { NestFactory } from '@nestjs/core';
-import { RoleSeedService } from './role/role-seed.service';
-import { SeedModule } from './seed.module';
-import { StatusSeedService } from './status/status-seed.service';
-import { UserSeedService } from './user/user-seed.service';
+import { NestFactory } from "@nestjs/core";
+import { RoleSeedService } from "./role/role-seed.service";
+import { SeedModule } from "./seed.module";
+import { StatusSeedService } from "./status/status-seed.service";
+import { UserSeedService } from "./user/user-seed.service";
+import { ProductsSeedService } from "./products/products-seed.service";
+import { FactorySeedService } from "./factory/factory-seed.service";
 
 const runSeed = async () => {
   const app = await NestFactory.create(SeedModule);
@@ -11,7 +13,8 @@ const runSeed = async () => {
   await app.get(RoleSeedService).run();
   await app.get(StatusSeedService).run();
   await app.get(UserSeedService).run();
-
+  await app.get(FactorySeedService).run();
+  await app.get(ProductsSeedService).run();
   await app.close();
 };
 

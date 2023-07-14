@@ -1,5 +1,5 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
-import { EntityHelper } from 'src/utils/entity-helper';
+import { Column, Entity, PrimaryColumn } from "typeorm";
+import { EntityHelper } from "src/utils/entity-helper";
 
 @Entity()
 export class Factory extends EntityHelper {

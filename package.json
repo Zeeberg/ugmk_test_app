@@ -2,15 +2,11 @@
   "name": "ugmk_test_app",
   "version": "1.0.0",
   "private": true,
-  "workspaces": {
-    "packages": [
-      "*"
-    ]
-  },
   "description": "ugmk_test_app",
   "main": "index.js",
   "scripts": {
-    "start": "echo \"Error: no test specified\" && exit 1"
+    "start": "echo \"Error: no test specified\" && exit 1",
+    "install": "(cd web && npm install) && (cd backend && npm install)"
   },
   "author": "Daniil Berezin",
   "license": "ISC"
