@@ -5,7 +5,7 @@
   "description": "ugmk_test_app",
   "main": "index.js",
   "scripts": {
-    "start": "echo \"Error: no test specified\" && exit 1",
+    "start": "(cd web && npm run dev)",
     "install": "(cd web && npm install) && (cd backend && npm install)"
   },
   "author": "Daniil Berezin",
