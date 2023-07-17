@@ -8,8 +8,9 @@ import {
   Legend,
   Pie,
   PieChart,
-  ResponsiveContainer,
 } from 'recharts';
+import { PIE_CELL_COLORS } from '../../utils/constants';
+import styles from './styles.module.scss';
 
 const DetailProduct = () => {
   const navigate = useNavigate();
@@ -28,9 +29,15 @@ const DetailProduct = () => {
     navigate(`/${filter}`);
   };
 
+  const fetchData = async (monthNumber: string, factoryId: string) => {
+    const productsDetail = await ProductService.getByMonthAndFactory(monthNumber, factoryId)
+    setProductData(productsDetail);
+  }
+
   useEffect(() => {
-    const foundProductData = ProductService.getByMonthAndFactory();
-    setProductData(foundProductData);
+    const monthNumber = location.pathname.split('/')[3]
+    const factoryId = location.pathname.split('/')[2]
+    fetchData(monthNumber, factoryId)
   }, []);
 
   return (
@@ -39,21 +46,23 @@ const DetailProduct = () => {
       <h1>
         Статистика продукции {data.tooltipPayload[0].name} за {data.name}
       </h1>
+      <div className={styles['product-detail']}>
+        <PieChart width={400} height={400}>
+          <Legend />
+          <Pie data={productData} cx="50%" cy="50%" dataKey="value">
+            <LabelList
+              dataKey="value"
+              position="outside"
+              offset={15}
+              stroke="none"
+            />
+            {productData.map((item, index) => (
+              <Cell key={item.name} fill={PIE_CELL_COLORS[index]} />
+            ))}
+          </Pie>
+        </PieChart>
+      </div>
 
-      <PieChart width={400} height={400}>
-        <Legend />
-        <Pie data={productData} cx="50%" cy="50%" dataKey="value">
-          <LabelList
-            dataKey="value"
-            position="outside"
-            offset={15}
-            stroke="none"
-          />
-          {productData.map((item, index) => (
-            <Cell key={item.name} fill="" />
-          ))}
-        </Pie>
-      </PieChart>
     </div>
   );
 };

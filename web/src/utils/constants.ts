@@ -12,3 +12,6 @@ export const SELECT_PRODUCTS_FILTER = [
     key: 'product2',
   },
 ];
+
+
+export const PIE_CELL_COLORS = ['#008001', '#fea500', '#ff0000'];

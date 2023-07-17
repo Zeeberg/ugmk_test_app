@@ -4,6 +4,6 @@ export class ProductsDetailResDto {
 
   constructor(name: string, value: number) {
     this.name = "Продукт " + name.match(/\d/g)?.join();
-    this.value = value;
+    this.value = value / 1000;
   }
 }

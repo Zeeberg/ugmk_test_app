@@ -28,12 +28,19 @@ const Products = () => {
     foundFilter || SELECT_PRODUCTS_FILTER[0].key,
   );
 
+  const fetchData = async (filter?:string) =>{
+    const products = await ProductService.getAll(filter);
+    setProductsData(products);
+  }
+
+  useEffect(() => {
+    fetchData(filter)
+  }, [filter]);
+
   useEffect(() => {
     if (!foundFilter) {
       navigate('/');
     }
-    const products = ProductService.getAll();
-    setProductsData(products);
   }, []);
 
   const saveFilter = (target: string) => {
@@ -55,32 +62,32 @@ const Products = () => {
 
   return (
     <>
+    <div className={styles['products-wrapper']}>
       <div>
         <SelectProduct saveFilter={saveFilter} filter={filter} />
-        <p>hey${filter}</p>
       </div>
-      <div className={styles['products-wrapper']}>
-        <BarChart width={1000} height={400} data={productsData}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar
-            dataKey="1.factoryA"
-            name="Фабрика А"
-            fill="#8884d8"
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-            onClick={(data) => toDetailProductPage(data)}
-          />
-          <Bar
-            dataKey="2.factoryB"
-            name="Фабрика Б"
-            fill="#82ca9d"
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-            onClick={(data) => toDetailProductPage(data)}
-          />
-        </BarChart>
+      <BarChart width={1000} height={400} data={productsData}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar
+          dataKey="1.factoryA"
+          name="Фабрика А"
+          fill="#ff0000"
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+          onClick={(data) => toDetailProductPage(data)}
+        />
+        <Bar
+          dataKey="2.factoryB"
+          name="Фабрика Б"
+          fill="#0000ff"
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+          onClick={(data) => toDetailProductPage(data)}
+        />
+      </BarChart>
+
       </div>
     </>
   );

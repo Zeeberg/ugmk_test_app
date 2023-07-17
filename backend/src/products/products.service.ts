@@ -22,8 +22,8 @@ export class ProductsService {
     return products.map((product, index) => {
       return {
         name: monthNames[index],
-        "1.factoryA": product[0].sum,
-        "2.factoryA": product[1].sum,
+        "1.factoryA": product[0].sum / 1000,
+        "2.factoryB": product[1].sum / 1000,
         monthNumber: index + 1,
       };
     });
@@ -35,7 +35,6 @@ export class ProductsService {
     );
 
     const productDetailRes: ProductsDetailResDto[] = [];
-    console.log(product);
     for (const key in product) {
       const item = product[key];
 
